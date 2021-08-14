@@ -1,9 +1,9 @@
 {
-  "name": "obol-frontend",
+  "name": "IAmTheChad",
   "private": true,
-  "description": "A home page for the Obol Network",
+  "description": "A leaderboard for the I Am The Chad NFT",
   "version": "0.1.0",
-  "author": "Oisín Kyne <oisin@obol.tech>",
+  "author": "Oisín Kyne <oisin@kyne.eu>",
   "dependencies": {
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.9.1",
@@ -40,9 +40,15 @@
     "jest": "^26.6.3",
     "prettier": "2.2.1"
   },
-  "eslintConfig":{
-    "rules":{
-      "react/jsx-pascal-case": [1, { "allowAllCaps": true, "allowNamespace": true}]
+  "eslintConfig": {
+    "rules": {
+      "react/jsx-pascal-case": [
+        1,
+        {
+          "allowAllCaps": true,
+          "allowNamespace": true
+        }
+      ]
     }
   },
   "keywords": [
@@ -53,7 +59,7 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
-    "deploy": "gatsby build --prefix-paths && echo \"eth2.kyne.eu\" > ./public/CNAME && gh-pages -d public",
+    "deploy": "gatsby build --prefix-paths && echo \"chad.kyne.eu\" > ./public/CNAME && gh-pages -d public",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
@@ -62,9 +68,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ObolNetwork/obol-frontend"
+    "url": "https://github.com/OisinKyne/IAmTheChad"
   },
   "bugs": {
-    "url": "https://github.com/ObolNetwork/obol-frontend/issues"
+    "url": "https://github.com/OisinKyne/IAmTheChad/issues"
   }
 }

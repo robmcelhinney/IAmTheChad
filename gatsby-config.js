@@ -1,9 +1,10 @@
 module.exports = {
   siteMetadata: {
-    title: `Obol Network`,
-    description: `The Ethereum Shared Secret Validator Network`,
-    author: `@ObolNetwork`,
-    baseURL: `https://obol.tech`,
+    title: `I am the Chad`,
+    description: `Ethereum's most 🔥 NFT`,
+    author: `@OisinKyne`,
+    baseURL: `https://chad.kyne.eu`,
+    contractAddress: `0x621A6D60C7c16a1ac9BbA9CC61464a16b43Cac51`
   },
   pathPrefix: "/",
   plugins: [

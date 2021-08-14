@@ -3,8 +3,6 @@ import React from "react"
 import { AppBar, Button, Grid, Toolbar } from "@material-ui/core"
 import { Link } from 'gatsby';
 import { StaticImage } from 'gatsby-plugin-image';
-import ObolIconWhite from './ObolIconWhite';
-import obol_logo from '../images/obolnetwork.png';
 import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) =>
@@ -14,7 +12,7 @@ const useStyles = makeStyles((theme) =>
       display: 'grid',
       // borderRadius: '1em',
       padding: '1em',
-      background: `conic-gradient(from 315deg, #19314b, #37606b, #61ac9f, #81bba3, #61ac9f, #37606b, #19314b)`
+      background: `linear-gradient(to bottom right, #ffab2e, #fa8034, #eb5541, #d3284d, #b20058, #88005f, #550061, #06005c)`
       // Not using background images as they can't be loaded in a performant manner
       // switched to StaticImage instead with overlapping grid elements.
       // backgroundImage: `url(${mobile_bg})`,
@@ -25,8 +23,9 @@ const useStyles = makeStyles((theme) =>
     },
     bg_image: {
       gridArea: "1/1",
+      minHeight: '100vh',
       maxHeight: '100vh',
-      backgroundColor: '#090909',
+      backgroundColor: '#fff',
       borderRadius: `1em`
     },
     menu: {
@@ -41,14 +40,15 @@ const useStyles = makeStyles((theme) =>
       fontSize: '22pt',
       // backgroundColor: 'rgba(255, 255, 255, 0.85)',
       // borderRadius: '4px',
-      padding: '0.2rem 0.4rem',
+      // padding: '0.2rem 0.4rem',
       boxSizing: 'content-box',
+      maxWidth: '2rem'
     },
     menuButton: {
       // marginRight: theme.spacing(1),
       // alignSelf: 'flex-end',
       // marginBottom: 'auto'
-      color: '#fff'
+      color: '#000'
     },
     appbar: {
       backgroundColor: `transparent`,
@@ -73,22 +73,7 @@ const useStyles = makeStyles((theme) =>
     },
     link: {
       textDecoration: 'none',
-      color: '#fff',
-    },
-    obolLogo: {
-      backgroundColor: `transparent`,
-      backgroundImage: `url(${obol_logo})`,
-      backgroundRepeat: `no-repeat`,
-      backgroundOrigin: `padding-box`,
-      backgroundPosition: '50%',
-      backgroundSize: `contain`,
-      width: '100%',
-      maxWidth: `800px`,
-      height: '10rem',
-      margin: `auto`,
-      [theme.breakpoints.up('lg')]: {
-        height: "6rem",
-      },
+      color: '#000',
     },
     learnMore: {
       alignSelf: 'center',
@@ -97,7 +82,7 @@ const useStyles = makeStyles((theme) =>
     title: {
       alignSelf: 'center',
       font: "normal normal normal 42px/48px Montserrat",
-      color: '#fff',
+      color: '#000',
       // backgroundColor: 'red',
       [theme.breakpoints.up('md')]: {
         font: "normal normal normal 64px/72px Montserrat",
@@ -108,7 +93,7 @@ const useStyles = makeStyles((theme) =>
       textAlign: 'center',
       margin: 'auto',
       font: "normal normal 500 26px/34px Montserrat",
-      color: '#fff',
+      color: '#000',
       // textShadow: `0px 0px 5px #fff`,
       // backgroundColor: 'green',
       [theme.breakpoints.up('lg')]: {
@@ -129,34 +114,42 @@ export default function Header({ siteTitle, siteDescription }) {
         loading="eager"
         alt="Background Image"
         placeholder="blurred"
-        src={`../images/obol_bg_image.png`}
+        src={`../images/shittybg.png`}
       />
       <AppBar position="static" className={classes.appbar}>
         <Toolbar className={classes.toolbar}>
           <Grid container className={classes.menu}>
             <Grid item>
               <Link to="/" className={classes.link}>
-                <ObolIconWhite className={classes.menuLogo} />
+                {/* <ObolIconWhite className={classes.menuLogo} /> */}
+                <StaticImage
+                  className={classes.menuLogo}
+                  layout="constrained"
+                  loading="eager"
+                  alt="Fire Emoji"
+                  placeholder="blurred"
+                  src={`../images/fire.png`}
+                />
               </Link>
             </Grid>
             <Grid item>
               <Button
                 component={Link}
-                to={"https://discord.gg/n6ebKsX46w"}
+                to={"https://opensea.io/assets/0x621a6d60c7c16a1ac9bba9cc61464a16b43cac51/1"}
                 rel="noopener noreferrer"
                 target="_blank"
                 color="inherit"
                 className={classes.menuButton}
                 variant="outlined"
                 size={'small'}>
-                Join the Discord
+                View on OpenSea
               </Button>
             </Grid>
           </Grid>
-            <div className={classes.obolLogo} />
-            {/* <Typography className={classes.title} variant="h5">
+            {/* <div className={classes.obolLogo} /> */}
+            <Typography className={classes.title} variant="h5">
               {siteTitle}
-            </Typography> */}
+            </Typography>
             <Typography className={classes.subtitle} variant="h5" >
               {siteDescription}
             </Typography>

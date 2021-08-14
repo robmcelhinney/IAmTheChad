@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) =>
             },
         },
         logo: {
-            //maxWidth: '5rem',
+            maxWidth: '1rem',
             textDecoration: 'none',
             color: '#626262',
             margin: 'auto',
@@ -67,24 +67,31 @@ export default function Footer() {
     return (
         <div className={classes.root}>
 
-            <ObolIconWhite className={classes.logo} />
-
+            {/* <ObolIconWhite className={classes.logo} /> */}
+            <StaticImage
+                  className={classes.logo}
+                  layout="constrained"
+                  loading="eager"
+                  alt="Fire Emoji"
+                  placeholder="blurred"
+                  src={`../images/fire.png`}
+                />
             {/* Copyright text */}
             <p className={classes.text}>
-                &#169; {new Date().getFullYear().toString() + " "}
+                {/* &#169; {new Date().getFullYear().toString() + " "}
                 <Link
                     to="/"
                     rel="noopener noreferrer"
                     className={classes.link}
                 >Obol Technologies Inc.
-                </Link>
+                </Link> */}
             </p>
 
             {/* Social Media SVGs */}
             <span className={classes.socials}>
                 {/* Twitter */}
                 <a
-                    href="https://twitter.com/ObolNetwork"
+                    href="https://twitter.com/peter_szilagyi/status/1425899328560848903"
                     rel="noopener noreferrer"
                     target="_blank"
                 >
@@ -101,7 +108,7 @@ export default function Footer() {
                 </a>
                 {/*Github, unhappy its not an SVG like the others */}
                 <a
-                    href="https://github.com/ObolNetwork/"
+                    href="https://github.com/OisinKyne/IAmTheChad"
                     rel="noopener noreferrer"
                     target="_blank"
                 >
@@ -113,7 +120,7 @@ export default function Footer() {
                         className={classes.social}
                     />
                 </a>
-                {/* Discord */}
+                {/* ToDo: Etherscan */}
                 <a
                     href="https://discord.gg/n6ebKsX46w"
                     rel="noopener noreferrer"
@@ -129,7 +136,7 @@ export default function Footer() {
                         style={{ margin: '0.1rem 0.15rem 0rem 0.15rem', }}
                     />
                 </a>
-                {/* Ghost Blog */}
+                {/* ToDo: OpenSea */}
                 <a
                     href="https://blog.obol.tech/"
                     rel="noopener noreferrer"

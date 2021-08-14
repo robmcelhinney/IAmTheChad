@@ -28,7 +28,7 @@ function SEO({ description, lang, meta, title }) {
   )
 
   const metaDescription = description || site.siteMetadata.description
-  const domainName = !!site.siteMetadata.baseURL ? site.siteMetadata.baseURL  : "https://obol.network"
+  const domainName = !!site.siteMetadata.baseURL ? site.siteMetadata.baseURL  : "https://chad.kyne.eu"
 
   return (
     <Helmet
@@ -56,7 +56,7 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           property: `og:image`,
-          content: `${domainName}/obolnetwork.png`,
+          content: `${domainName}/shittybg.png`,
         },
         {
           property: `og:image:width`,

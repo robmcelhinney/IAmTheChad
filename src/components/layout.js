@@ -61,15 +61,7 @@ const Layout = ({ children }) => {
           />
           <div
             style={{
-              // margin: `0 auto`,
-              // maxWidth: 960,
-              // padding: `0 1.0875rem 1.45rem`,
-              width: "100%",
-              // tried out a background image which looks alright, food for future thought
-              // imported at top of page
-              // backgroundImage: `url(${background_image})`,
-              // backgroundRepeat: 'no-repeat',
-              // backgroundSize: 'cover',
+              width: "100%"
             }}
           >
             <main>{children}</main>
