@@ -120,36 +120,34 @@ export default function Footer() {
                         className={classes.social}
                     />
                 </a>
-                {/* ToDo: Etherscan */}
+                {/* Etherscan */}
                 <a
-                    href="https://discord.gg/n6ebKsX46w"
+                    href="https://etherscan.io/address/0x621a6d60c7c16a1ac9bba9cc61464a16b43cac51"
                     rel="noopener noreferrer"
                     target="_blank"
                 >
 
                     <StaticImage
-                        src="../images/Discord-Logo-White.svg"
-                        alt="Github Icon"
+                        src="../images/etherscan-logo-white.png"
+                        alt="Etherscan Icon"
                         layout="constrained"
                         placeholder="none"
                         className={classes.social}
-                        style={{ margin: '0.1rem 0.15rem 0rem 0.15rem', }}
                     />
                 </a>
-                {/* ToDo: OpenSea */}
+                {/* OpenSea */}
                 <a
-                    href="https://blog.obol.tech/"
+                    href="https://opensea.io/assets/0x621a6d60c7c16a1ac9bba9cc61464a16b43cac51/1"
                     rel="noopener noreferrer"
                     target="_blank"
                 >
 
                     <StaticImage
-                        src="../images/ghost-cms-white.png"
-                        alt="Blog Icon"
+                        src="../images/openseawhite.png"
+                        alt="Opensea Icon"
                         layout="constrained"
                         placeholder="none"
                         className={classes.social}
-                        style={{ padding: `0.1rem`, }}
                     />
                 </a>
             </span>

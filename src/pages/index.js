@@ -6,7 +6,7 @@ import SEO from "../components/seo"
 export default function IndexPage({ data }) {
   return (
     <Layout>
-      <SEO title="Obol Network" />
+      <SEO title="I am the Chad - The basefee NFT" />
     </Layout>
   )
 }
