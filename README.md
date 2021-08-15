@@ -25,5 +25,10 @@ npm run test -- -u # Updates snapshots for tests when an intentional change is m
 
 - To call a public array on a solidity smart contract is tricky. They give you a public getter, but not a public getter of the array's `length` property. So instead your best option is to iterate through the array elements until your `eth_call` hits a revert. For performance reasons, this site does this process at build time, and updates daily on a cron. Injecting web3 apis to poll on site load is slow and costly. 
     ```sh
-        curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","id":6,"method":"eth_call","params":[{"from":"0x0000000000000000000000000000000000000000","data":"0x41fcb7d70000000000000000000000000000000000000000000000000000000000000004","to":"0x621a6d60c7c16a1ac9bba9cc61464a16b43cac51"},"latest"]}' https://mainnet.infura.io/v3/api-key-here
-    ```
+    # Read an address from the hall of fame 
+    curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","id":6,"method":"eth_call","params":[{"from":"0x0000000000000000000000000000000000000000","data":"0x41fcb7d70000000000000000000000000000000000000000000000000000000000000004","to":"0x621a6d60c7c16a1ac9bba9cc61464a16b43cac51"},"latest"]}' https://mainnet.infura.io/v3/339520a08e3446cc8bf2f008d7de8339
+    
+
+    # Read the reownBasefee
+    curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","id":6,"method":"eth_call","params":[{"from":"0x0000000000000000000000000000000000000000","data":"0xc21ac9a50000000000000000000000000000000000000000000000000000000000000000","to":"0x621a6d60c7c16a1ac9bba9cc61464a16b43cac51"},"latest"]}' https://mainnet.infura.io/v3/339520a08e3446cc8bf2f008d7de8339
+    '''

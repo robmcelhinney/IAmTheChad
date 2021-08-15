@@ -1,7 +1,7 @@
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from "react"
 import { AppBar, Button, Grid, Toolbar } from "@material-ui/core"
-import { Link } from 'gatsby';
+import { Link, useStaticQuery, graphql } from 'gatsby';
 import { StaticImage } from 'gatsby-plugin-image';
 import { Typography } from '@material-ui/core';
 
@@ -28,6 +28,11 @@ const useStyles = makeStyles((theme) =>
       backgroundColor: '#fff',
       borderRadius: `1em`
     },
+    infoButtons: {
+      alignSelf: 'flex-end',
+      marginBottom: 'auto',
+      justifyContent: 'center'
+    },
     menu: {
       marginRight: theme.spacing(1),
       alignSelf: 'flex-end',
@@ -45,10 +50,11 @@ const useStyles = makeStyles((theme) =>
       maxWidth: '2rem'
     },
     menuButton: {
-      // marginRight: theme.spacing(1),
+      marginRight: theme.spacing(1),
       // alignSelf: 'flex-end',
       // marginBottom: 'auto'
-      color: '#000'
+      color: '#000',
+      backgroundColor: '#fff'
     },
     appbar: {
       backgroundColor: `transparent`,
@@ -100,11 +106,38 @@ const useStyles = makeStyles((theme) =>
         font: "normal normal 500 36px/48px Montserrat",
       },
     },
+    hallOfFameDiv: {
+      alignSelf: 'center',
+      textAlign: 'center',
+    },
+    hallOfFameAddress: {
+      color: '#000',
+      lineHeight: '2rem'
+    },
+    hallOfFameLink: {
+      textDecorationColor: '#000',
+      color: '#000'
+    }
   }),
 );
 
 export default function Header({ siteTitle, siteDescription }) {
   const classes = useStyles();
+  // Retrieve basefee and hall of fame that was calculated at the data gathering stage of the build process.
+  const data = useStaticQuery(graphql`
+    query WhoIsTheChad {
+      basefee {
+        gwei
+        wei
+      }
+      hof {
+        hallOfFamers
+      }
+    }
+  `)
+
+  console.log(`Gatsby grapql query returned: `)
+  console.log(data)
 
   return (
     <div className={classes.root}>
@@ -146,14 +179,51 @@ export default function Header({ siteTitle, siteDescription }) {
               </Button>
             </Grid>
           </Grid>
-            {/* <div className={classes.obolLogo} /> */}
-            <Typography className={classes.title} variant="h5">
-              {siteTitle}
-            </Typography>
+          {/* <div className={classes.obolLogo} /> */}
+          <Typography className={classes.title} variant="h5">
+            {siteTitle}
+          </Typography>
+          <Typography className={classes.subtitle} variant="h5" >
+            {siteDescription}
+          </Typography>
+          {!!data.basefee && !!data.hof && (
+            <Grid container className={classes.infoButtons}><Grid item>
+              <Button
+                color="inherit"
+                className={classes.menuButton}
+                variant="outlined"
+                size={'large'}>
+                Base Fee To Steal: {Number(data.basefee.gwei).toFixed(2).toString()+" "}gwei
+              </Button>
+            </Grid>
+              <Grid item><Button
+                color="inherit"
+                className={classes.menuButton}
+                variant="outlined"
+                size={'large'}>
+                Hall of Famers: {data.hof.hallOfFamers.length}
+              </Button></Grid>
+            </Grid>)}
+          {!!data.hof && (<div className={classes.hallOfFameDiv}>
             <Typography className={classes.subtitle} variant="h5" >
-              {siteDescription}
+              The Fallen Chads
             </Typography>
-   
+            {data.hof.hallOfFamers.map((hof, index) => {
+              return (
+                <Typography className={classes.hallOfFameAddress} variant={"body2"} gutterBottom>{index+1}.{" "} 
+                  <Link
+                    to={`https://etherscan.io/address/${hof}`}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    // color="inherit"
+                    className={classes.hallOfFameLink}>
+                    {hof}
+                  </Link>
+                </Typography>
+              )
+            })}
+          </div>)}
+
         </Toolbar>
       </AppBar>
     </div>
