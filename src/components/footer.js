@@ -21,12 +21,10 @@ const useStyles = makeStyles((theme) =>
             },
         },
         logo: {
-            maxWidth: '1rem',
+            maxWidth: '1.5rem',
             textDecoration: 'none',
             color: '#626262',
             margin: 'auto',
-            borderRadius: '4px',
-            padding: '0.1rem 0.2rem',
             boxSizing: 'content-box',
         },
         social: {
@@ -67,7 +65,6 @@ export default function Footer() {
     return (
         <div className={classes.root}>
 
-            {/* <ObolIconWhite className={classes.logo} /> */}
             <StaticImage
                   className={classes.logo}
                   layout="constrained"
