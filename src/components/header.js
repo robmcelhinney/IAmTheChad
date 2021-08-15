@@ -28,6 +28,11 @@ const useStyles = makeStyles((theme) =>
       backgroundColor: '#fff',
       borderRadius: `1em`
     },
+    infoButton: {
+      margin: theme.spacing(1),
+      color: '#000',
+      backgroundColor: '#fff'
+    },
     infoButtons: {
       alignSelf: 'flex-end',
       marginBottom: 'auto',
@@ -50,7 +55,7 @@ const useStyles = makeStyles((theme) =>
       maxWidth: '2rem'
     },
     menuButton: {
-      marginRight: theme.spacing(1),
+      // marginRight: theme.spacing(1),
       // alignSelf: 'flex-end',
       // marginBottom: 'auto'
       color: '#000',
@@ -190,7 +195,7 @@ export default function Header({ siteTitle, siteDescription }) {
             <Grid container className={classes.infoButtons}><Grid item>
               <Button
                 color="inherit"
-                className={classes.menuButton}
+                className={classes.infoButton}
                 variant="outlined"
                 size={'large'}>
                 Base Fee To Steal: {Number(data.basefee.gwei).toFixed(2).toString()+" "}gwei
@@ -198,7 +203,7 @@ export default function Header({ siteTitle, siteDescription }) {
             </Grid>
               <Grid item><Button
                 color="inherit"
-                className={classes.menuButton}
+                className={classes.infoButton}
                 variant="outlined"
                 size={'large'}>
                 Hall of Famers: {data.hof.hallOfFamers.length}
@@ -217,7 +222,7 @@ export default function Header({ siteTitle, siteDescription }) {
                     target="_blank"
                     // color="inherit"
                     className={classes.hallOfFameLink}>
-                    {hof}
+                    {hof.substring(0,12)+"..."+hof.substring(hof.length-12,hof.length)}
                   </Link>
                 </Typography>
               )
