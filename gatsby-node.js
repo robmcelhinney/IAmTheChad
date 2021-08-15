@@ -5,7 +5,6 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
-// You can delete this file if you're not using it
 const path = require(`path`)
 const fetch = require(`node-fetch`)
 
@@ -31,36 +30,8 @@ function timeoutPromise(ms, promise) {
     )
   })
 }
-// GraphQL auto infers schemas, but fails to realise NFT Metadata Attributes can have string and int values, this function fixes that
-exports.createSchemaCustomization = ({ actions }) => {
-  const { createTypes } = actions
-  const typeDefs = `
-    type NFTNftsAttributes implements Node {
-      trait_type: String,
-      display_type: String,
-      value: String
-    }
-  `
-  createTypes(typeDefs)
-}
 
-// exports.sourceNodes = async ({
-//   actions: { createNode },
-//   createContentDigest,
-// }) => {
-//   // First enter a dummy node in case the below fails
-//   createNode({
-//     id: `nft-array`,
-//     parent: null,
-//     children: [],
-//     internal: {
-//       type: `NFT`,
-//       contentDigest: createContentDigest("bad-data"),
-//     },
-//   })
-// }
-
-// Grab hall of fame from IAmTheChad contract at build time. 
+// Grab hall of fame + basefee + tokenURI from IAmTheChad contract at build time. 
 exports.sourceNodes = async ({
   actions: { createNode },
   createContentDigest,
@@ -74,13 +45,12 @@ exports.sourceNodes = async ({
   const resultData = await result.json()
 
   if(!!resultData.result){
-    console.log(`Retrieved baseFee from contract of ${resultData.result}`)
-
+    
     // convert a wei hex value to uint gwei. 
     const wei = parseInt(resultData.result, 16)
-    console.log(`Wei value is ${wei.toString()}`)
+    console.log(`Current reown value is ${wei.toString()} wei.`)
     const gwei = wei / 1000000000.0
-    console.log(`Gwei value is ${gwei.toString()}`)
+    console.log(`Current reown value is ${gwei.toString()} gwei.`)
 
     // Save this data to the Gatsby Graph for later use in static site construction
     createNode({
@@ -96,5 +66,43 @@ exports.sourceNodes = async ({
       },
     })
   }
+
+  // Now lets loop through the hallOfFame address list until a request fails/reverts on us. 
+  let shouldBreak = false;
+  let fameIndex = 0
+  const hallOfFamers = []
+  while(!shouldBreak){
+    // console.log(`Searching hallOfFame array at index ${fameIndex}`)
+    const result = await fetch(`https://mainnet.infura.io/v3/339520a08e3446cc8bf2f008d7de8339`,{
+      method: 'POST',
+      headers: { 'Content-Type':'application/json'},
+      body: JSON.stringify({"jsonrpc":"2.0","id":6,"method":"eth_call","params":[{"from":"0x0000000000000000000000000000000000000000","data":`0x41fcb7d7000000000000000000000000000000000000000000000000000000000000000${fameIndex}`,"to":"0x621a6d60c7c16a1ac9bba9cc61464a16b43cac51"},"latest"]})
+    })
+    const resultData = await result.json()
+    
+    if(!!resultData.result){
+      // console.log(`Retrieved another hall of famer address:  ${resultData.result}`)
+      const address = `0x`+resultData.result.substring(resultData.result.length-40, resultData.result.length)
+      // console.log(`\n\nAddress: ${address}`)
+      hallOfFamers.push(address)
+    } else {
+      // console.log(`Failed to get a result from the hall of fame API call, exiting loop`)
+      shouldBreak = true
+    }
+    fameIndex += 1
+  }
+  // Push the hall of fame to the gatsby graph
+  createNode({
+    hallOfFamers: hallOfFamers,
+    // required fields
+    id: `hallOfFamers`,
+    parent: null,
+    children: [],
+    internal: {
+      type: `HOF`,
+      contentDigest: createContentDigest(resultData),
+    },
+  })
+  console.log(`The following hall of famers were found: ${hallOfFamers}`)
 
 }
