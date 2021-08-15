@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `I am the Chad`,
+    title: `I'm the Chad!`,
     description: `Ethereum's most 🔥 NFT`,
     author: `@OisinKyne`,
     baseURL: `https://chad.kyne.eu`,

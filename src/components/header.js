@@ -198,7 +198,7 @@ export default function Header({ siteTitle, siteDescription }) {
                 className={classes.infoButton}
                 variant="outlined"
                 size={'large'}>
-                Base Fee To Steal: {Number(data.basefee.gwei).toFixed(2).toString()+" "}gwei
+                Base Fee To Steal: {Number(data.basefee.gwei).toFixed(2).toString() + " "}gwei
               </Button>
             </Grid>
               <Grid item><Button
@@ -213,16 +213,16 @@ export default function Header({ siteTitle, siteDescription }) {
             <Typography className={classes.subtitle} variant="h5" >
               The Fallen Chads
             </Typography>
-            {data.hof.hallOfFamers.map((hof, index) => {
+            {data.hof.hallOfFamers.slice(0, data.hof.hallOfFamers.length - 1).map((/** @type {string} */ hof, /** @type {number} */ index) => {
               return (
-                <Typography className={classes.hallOfFameAddress} variant={"body2"} gutterBottom>{index+1}.{" "} 
+                <Typography className={classes.hallOfFameAddress} variant={"body2"} gutterBottom>{index + 1}.{" "}
                   <Link
                     to={`https://etherscan.io/address/${hof}`}
                     rel="noopener noreferrer"
                     target="_blank"
                     // color="inherit"
                     className={classes.hallOfFameLink}>
-                    {hof.substring(0,12)+"..."+hof.substring(hof.length-12,hof.length)}
+                    {hof.substring(0, 12) + "..." + hof.substring(hof.length - 12, hof.length)}
                   </Link>
                 </Typography>
               )
